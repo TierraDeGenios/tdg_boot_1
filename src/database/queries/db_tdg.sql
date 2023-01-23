@@ -102,7 +102,6 @@ CREATE TABLE developer(
     gitHubURL VARCHAR(250),
     linkedInURL VARCHAR(250),
     headline VARCHAR(100) NOT NULL,
-    profileOwner TINYINT UNSIGNED NOT NULL,
     openToWork TINYINT UNSIGNED NOT NULL,
     isActive TINYINT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -224,7 +223,7 @@ CREATE TABLE education (
 
 CREATE TABLE dev_language(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    language_id INT UNSIGNED NOT NULL, 
+    language_id INT UNSIGNED NOT NULL,
     developer_id INT UNSIGNED NOT NULL,
     proficiency_id INT UNSIGNED NOT NULL,
     isActive TINYINT UNSIGNED NOT NULL,
@@ -233,4 +232,19 @@ CREATE TABLE dev_language(
     FOREIGN KEY (language_id) REFERENCES language(id),
     FOREIGN KEY (developer_id) REFERENCES developer(id),
     FOREIGN KEY (proficiency_id) REFERENCES proficiency(id)
+);
+
+CREATE TABLE profile_ownership(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    developerId INT UNSIGNED NOT NULL,
+    recruiterId INT UNSIGNED ,
+    techLeadId INT UNSIGNED ,
+    ownerCategory TINYINT UNSIGNED,
+    percentage TINYINT UNSIGNED,
+    isActive TINYINT UNSIGNED NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (developerId) REFERENCES developer(id),
+    FOREIGN KEY (recruiterId) REFERENCES recruiter(id),
+    FOREIGN KEY (techLeadId) REFERENCES techLead(id)
 );
