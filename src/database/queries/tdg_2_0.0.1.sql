@@ -69,7 +69,7 @@ CREATE TABLE work_experience (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     developerId INT UNSIGNED NOT NULL,
     `from` DATE NOT NULL,
-    `to` DATE NOT NULL,
+    `to` DATE,
     current TINYINT UNSIGNED NOT NULL,
     description TEXT,
     company VARCHAR(50) NOT NULL,
@@ -85,7 +85,8 @@ CREATE TABLE education (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	developerId INT UNSIGNED NOT NULL,
 	`from` DATE NOT NULL,
-	`to` DATE NOT NULL,
+	`to` DATE,
+	current TINYINT UNSIGNED NOT NULL,
 	institution VARCHAR(200) NOT NULL,
 	diploma_URL VARCHAR(250),
 	degree VARCHAR(200) NOT NULL,
@@ -136,7 +137,7 @@ CREATE TABLE skills_report_developer_reviewer (
 );
 
 
-CREATE TABLE user_language(
+CREATE TABLE user_language (
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     languageId INT UNSIGNED NOT NULL,
     developerId INT UNSIGNED NOT NULL,
