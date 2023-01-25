@@ -125,16 +125,7 @@ CREATE TABLE reviewer (
     FOREIGN KEY (roleId) REFERENCES role(id)
 );
 
-CREATE TABLE skills_report_developer_reviewer (
-	id  INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    developerId INT UNSIGNED NOT NULL,
-    reviewerId INT UNSIGNED NOT NULL,
-    notes TEXT NOT NULL,
-    reportType TINYINT NOT NULL,
-	isActive TINYINT UNSIGNED NOT NULL,
-    FOREIGN KEY (developerId) REFERENCES developer(id),
-	FOREIGN KEY (reviewerId) REFERENCES reviewer(id)
-);
+
 
 
 CREATE TABLE user_language (
@@ -142,14 +133,16 @@ CREATE TABLE user_language (
     languageId INT UNSIGNED NOT NULL,
     developerId INT UNSIGNED,
     reviewerId INT UNSIGNED,
+    roleId INT UNSIGNED,
     proficiencyId INT UNSIGNED NOT NULL,
     isActive TINYINT UNSIGNED NOT NULL,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (languageId) REFERENCES language(id),
     FOREIGN KEY (developerId) REFERENCES developer(id),
-    FOREIGN KEY (proficiencyId) REFERENCES proficiency(id),
-	FOREIGN KEY (reviewerId) REFERENCES reviewer(id)
+    FOREIGN KEY (reviewerId) REFERENCES reviewer(id),
+	FOREIGN KEY (roleId) REFERENCES role (id),
+    FOREIGN KEY (proficiencyId) REFERENCES proficiency(id)
 );
 
 
@@ -167,13 +160,13 @@ CREATE TABLE profile_ownership(
 );
 
 
-CREATE TABLE recuiterSelection(
+CREATE TABLE recruiterSelection (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	reviewerId INT UNSIGNED NOT NULL,
     developerId INT UNSIGNED NOT NULL ,
     notes TEXT,
     authorization TINYINT UNSIGNED NOT NULL,
-    hired TINYINT UNSIGNED NOT NULL,
+    status TINYINT UNSIGNED NOT NULL,
     isActive TINYINT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -196,7 +189,18 @@ CREATE TABLE skill (
     FOREIGN KEY (techLanguageId) REFERENCES tech_language(id)
 );
 
-CREATE TABLE skill_score(
+CREATE TABLE skills_report_developer_reviewer (
+	id  INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    developerId INT UNSIGNED NOT NULL,
+    reviewerId INT UNSIGNED NOT NULL,
+    notes TEXT NOT NULL,
+    reportType TINYINT NOT NULL,
+	isActive TINYINT UNSIGNED NOT NULL,
+    FOREIGN KEY (developerId) REFERENCES developer(id),
+	FOREIGN KEY (reviewerId) REFERENCES reviewer(id)
+);
+
+CREATE TABLE skill_score (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     reportId INT UNSIGNED NOT NULL,
     skillId INT UNSIGNED NOT NULL,
