@@ -54,7 +54,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
 
-    let config = {tableName: "skill", underscored: true, timestamps: false};
+    let config = {
+        tableName: "skill", 
+        underscored: true, 
+        timestamps: false
+    };
 
     const Skill = sequelize.define(alias, cols, config);
     

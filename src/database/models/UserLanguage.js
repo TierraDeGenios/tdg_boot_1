@@ -14,7 +14,7 @@
 	FOREIGN KEY (roleId) REFERENCES role (id),
     FOREIGN KEY (proficiencyId) REFERENCES proficiency(id)
 );*/
-module.exports = (sequelize, dataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     
     let alias = "UserLanguage";
 
@@ -57,7 +57,11 @@ module.exports = (sequelize, dataTypes) => {
         }
     };
 
-    let config = {tableName: "user_language",underscored: true, timestamps: false};
+    let config = {
+        tableName: "user_language",
+        underscored: true, 
+        timestamps: false
+    };
 
     const User_language = sequelize.define(alias, cols, config);
     

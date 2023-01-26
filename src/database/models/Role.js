@@ -32,7 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
 
-    let config = {tableName: "role", underscored: true, timestamps: false};
+    let config = {
+        tableName: "role", 
+        underscored: true, 
+        timestamps: false
+    };
 
     const Role = sequelize.define(alias, cols, config);
     

@@ -93,7 +93,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
 
-    let config = {tableName: "reviewer", underscored: true, timestamps: false};
+    let config = {
+        tableName: "reviewer", 
+        underscored: true, 
+        timestamps: false
+    };
 
     const Reviewer = sequelize.define(alias, cols, config);
 

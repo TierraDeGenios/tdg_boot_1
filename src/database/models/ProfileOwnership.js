@@ -50,7 +50,11 @@ module.exports = (sequelize, DataTypes) => {
         },
     };
 
-    let config = {tableName: "profile_ownership", underscored: true, timestamps: false};
+    let config = {
+        tableName: "profile_ownership", 
+        underscored: true, 
+        timestamps: false
+    };
 
     const Profile_ownership = sequelize.define(alias, cols, config);
     
