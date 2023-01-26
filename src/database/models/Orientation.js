@@ -2,24 +2,26 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
 
-    let alias = "Language"
+    let alias = "Orientation"
     // se especifican las columnas de la db en un objeto literal
     let cols = {
+
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
-        }, 
+        },
+
         name: {
-            type: DataTypes.STRING(45),
+            type: DataTypes.STRING(20),
             allowNull: false
-        }, 
+        },
+        
         isActive: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
-
         created_at:{
             type: DataTypes.DATE
         },
@@ -31,15 +33,15 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "language",
+        tableName: "orientation",
         underscored: true,
         timestamps: false
     }
 
-    const Language = sequelize.define(alias, cols, config)
+    const Orientation = sequelize.define(alias, cols, config)
 
 
-    return Language;
+    return Orientation;
 
 
 }
