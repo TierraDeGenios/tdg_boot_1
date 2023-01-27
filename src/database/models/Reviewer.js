@@ -101,5 +101,12 @@ module.exports = (sequelize, DataTypes) => {
 
     const Reviewer = sequelize.define(alias, cols, config);
 
+    Reviewer.associate = (models) => {
+        Reviewer.belongsTo(models.Role, {
+            as: "role",
+            foreignKey: "roleId"
+        })
+    }
+
     return Reviewer;
 }
