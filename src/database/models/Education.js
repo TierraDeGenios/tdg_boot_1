@@ -55,11 +55,17 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "education",
-        underscored: true,
         timestamps: false
     }
 
-    const Education = sequelize.define(alias, cols, config)
+    const Education = sequelize.define(alias, cols, config);
+
+    Education.associate = (models) => {
+        Education.belongsTo(models.Developer, {
+            as: "educations",
+            foreignKey: "developerId"
+        })
+    }
 
 
     return Education;

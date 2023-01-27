@@ -49,7 +49,6 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "skills_report_developer_reviewer", 
-        underscored: true, 
         timestamps: false
     };
 
