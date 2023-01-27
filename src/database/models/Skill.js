@@ -56,7 +56,6 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "skill", 
-        underscored: true, 
         timestamps: false
     };
 

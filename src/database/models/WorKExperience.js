@@ -58,11 +58,19 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "work_experience",
-        underscored: true,
         timestamps: false
     }
 
     const WorkExperience = sequelize.define(alias, cols, config)
+
+    WorkExperience.associate = (models) => {
+        WorkExperience.belongsTo(models.Developer, {
+            as: "workExperiences",
+            foreignKey: "developerId"
+        })
+    }
+
+    
 
 
     return WorkExperience;

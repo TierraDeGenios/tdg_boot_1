@@ -34,7 +34,6 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "orientation",
-        underscored: true,
         timestamps: false
     }
 

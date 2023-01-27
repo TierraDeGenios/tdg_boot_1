@@ -59,7 +59,6 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "user_language",
-        underscored: true, 
         timestamps: false
     };
 

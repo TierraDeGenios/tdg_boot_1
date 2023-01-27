@@ -95,7 +95,6 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "reviewer", 
-        underscored: true, 
         timestamps: false
     };
 

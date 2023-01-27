@@ -111,11 +111,26 @@ module.exports = (sequelize, DataTypes) => {
 
     let config = {
         tableName: "developer",
-        underscored: true,
+        // underscored: true,
         timestamps: false
     }
 
     const Developer = sequelize.define(alias, cols, config)
+
+    Developer.associate = (models) => {
+        Developer.hasMany(models.WorkExperience, {
+            as: "workExperiences",
+            foreignKey: "developerId"
+        });
+
+        Developer.associate = (models) => {
+            Developer.hasMany(models.Education, {
+                as: "educations",
+                foreignKey: "developerId"
+            })
+        }
+
+    } 
 
 
     return Developer;
