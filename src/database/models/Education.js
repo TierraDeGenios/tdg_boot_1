@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "education",
+        freezeTableName: true,
         timestamps: false
     }
 

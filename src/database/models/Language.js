@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "language",
+        freezeTableName: true,
         timestamps: false
     }
 

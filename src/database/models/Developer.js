@@ -110,8 +110,8 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "developer",
-        // underscored: true,
+        freezeTableName: true,
+        // tableName: "developer",
         timestamps: false
     }
 

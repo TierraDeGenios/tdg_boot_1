@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
 
     WorkExperience.associate = (models) => {
         WorkExperience.belongsTo(models.Developer, {
-            as: "workExperiences",
+            as: "developer",
             foreignKey: "developerId"
         })
     }

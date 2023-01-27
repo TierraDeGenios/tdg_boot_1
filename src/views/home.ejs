@@ -9,9 +9,25 @@
 <body>
     <h1>TIERRA DE GENIOS</h1>
     <ul>
-        <% workexperiences.forEach(workexperience => { %>
+        <% developers.forEach(developer => { %>
+            <% if (developer.workExperiences.length > 0 ) { %>
+             
+                <li><%= developer.firstName %>  - <% developer.workExperiences.forEach(experience => { %>
+                    
+                    <%= experience.company %> 
+                    <%= experience.position %> </li>
+
+                <% }) %>
+                
+            <% } %>
+         
+        <% }) %>
+    </ul>
+
+    <ul>
+        <% workExperiences.forEach(workExperience => { %>
        
-            <li> <%= workexperience.workexperiences.developer.firstName %> </li> 
+            <li> <%= workExperience.position %> - <%= workExperience.developer.firstName %>  </li> 
          
         <% }) %>
     </ul>

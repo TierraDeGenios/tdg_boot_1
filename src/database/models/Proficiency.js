@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "proficiency",
+        freezeTableName: true,
         timestamps: false
     }
 

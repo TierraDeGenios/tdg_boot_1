@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "skill_score", 
+        freezeTableName: true,
         timestamps: false
     };
 

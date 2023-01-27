@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "profile_ownership", 
+        freezeTableName: true,
         timestamps: false
     };
 
