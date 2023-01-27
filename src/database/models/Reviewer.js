@@ -94,7 +94,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "reviewer", 
+        freezeTableName: true,
         timestamps: false
     };
 

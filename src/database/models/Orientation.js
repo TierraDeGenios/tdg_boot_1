@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "orientation",
+        freezeTableName: true,
         timestamps: false
     }
 
