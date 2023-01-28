@@ -37,6 +37,17 @@ module.exports = (sequelize, DataTypes) => {
 
     const Language = sequelize.define(alias, cols, config)
 
+    Language.associate = (models) => {
+        Language.belongsToMany(models.Proficiency, {
+            through:'UserLanguage',
+            foreignKey:'languageId',
+            otherKey:'proficiencyId',
+            timestamps:false
+        });
+        Language.hasMany(models.UserLanguage, {
+            foreignKey: "languageId"
+        });
+    }
 
     return Language;
 

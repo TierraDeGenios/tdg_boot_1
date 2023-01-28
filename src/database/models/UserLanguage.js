@@ -58,11 +58,20 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "user_language",
         timestamps: false
     };
 
     const User_language = sequelize.define(alias, cols, config);
+
+    User_language.associate = (models) => {
+        User_language.belongsTo(models.Language, {
+            foreignKey:'languageId'
+        });
+        User_language.belongsTo(models.Proficiency, {
+            foreignKey:'proficiencyId'
+        });
+    }
     
     return User_language;
 }

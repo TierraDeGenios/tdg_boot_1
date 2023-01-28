@@ -32,8 +32,23 @@ const mainController = {
                 console.log(error);
             })
 
-
-            // res.json(developers)
+            // Prueba bidireccional de la tabla UserLanguage
+            // let userLanguage = await db.UserLanguage.findAll({
+            //     include: [
+            //         {
+            //             association: "Language",
+            //             attributes: ["name"]
+            //         },
+            //         {
+            //             association: "Proficiency",
+            //             attributes: ["proficiency"] 
+            //         }
+            //     ]
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+            // })
+            // res.json(userLanguage)
 
             res.render("home", {workExperiences: work, developers: developers, title: "Home"})
 
