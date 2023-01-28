@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "education",
         timestamps: false
     }
 
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Education.associate = (models) => {
         Education.belongsTo(models.Developer, {
-            as: "educations",
+            as: "developerEducations",
             foreignKey: "developerId"
         })
     }

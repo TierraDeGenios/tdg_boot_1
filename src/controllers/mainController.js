@@ -13,7 +13,9 @@ const mainController = {
                     include: [
                         {
                             association: "workExperiences"
-                        }
+                        },
+                        
+
                     ]
                 }
             ).catch((error) => {
@@ -32,25 +34,78 @@ const mainController = {
                 console.log(error);
             })
 
+            let educations = await db.Education.findAll({
+                include: [
+                    {
+                    association: "developerEducations"
+                }
+                ]
+            }).catch((error) => {
+                console.log(error);
+            })
+
             // Prueba bidireccional de la tabla UserLanguage
-            // let userLanguage = await db.UserLanguage.findAll({
-            //     include: [
-            //         {
-            //             association: "Language",
-            //             attributes: ["name"]
-            //         },
-            //         {
-            //             association: "Proficiency",
-            //             attributes: ["proficiency"] 
-            //         }
-            //     ]
-            // })
-            // .catch((error) => {
-            //     console.log(error);
-            // })
+            let userLanguage = await db.UserLanguage.findAll({
+                include: [
+                    {
+                        association: "Language",
+                        attributes: ["name"]
+                    },
+                    {
+                        association: "Proficiency",
+                        attributes: ["proficiency"] 
+                    }
+                ]
+            })
+            .catch((error) => {
+                console.log(error);
+            })
             // res.json(userLanguage)
 
-            res.render("home", {workExperiences: work, developers: developers, title: "Home"})
+            let profileOwnerships = await db.ProfileOwnership.findAll({
+                include: [
+                    {
+                        association: "Developer"
+                    }, 
+                    {
+                        association: "Reviewer"
+                    }
+                ]
+            }).catch((error)=>{
+                console.log(error);
+            })
+
+
+            let reports = await db.SkillsReportDeveloperReviewer.findAll({
+                include: [
+                    {
+                        association: "Developer"
+                    },
+                    {
+                        association: "Reviewer"
+                    }
+                ]
+            }).catch((error)=>{
+                console.log(error);
+            })
+
+
+
+            let scores = await db.SkillScore.findAll({
+                include: [
+                    {
+                        association: "Skill"
+                    },
+                    {
+                        association: "SkillsReportDeveloperReviewer"
+                    }
+                ]
+            })
+
+
+            res.json(scores)
+
+            // res.render("home", {workExperiences: work, developers: developers, educations: educations, profileOwnerships: profileOwnerships, title: "Home"})
 
         }
 

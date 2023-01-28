@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         averageScore: {
             type: DataTypes.DECIMAL(6, 3),
             allowNull: false
-        }, 
+        },
         about: {
             type: DataTypes.TEXT,
         },
@@ -100,18 +100,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
-        created_at:{
+        created_at: {
             type: DataTypes.DATE
         },
 
-        updated_at:{
+        updated_at: {
             type: DataTypes.DATE
         }
     };
 
     let config = {
-        freezeTableName: true,
-        // tableName: "developer",
+        // freezeTableName: true,
+        tableName: "developer",
         timestamps: false
     }
 
@@ -123,14 +123,34 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "developerId"
         });
 
-        Developer.associate = (models) => {
-            Developer.hasMany(models.Education, {
-                as: "educations",
-                foreignKey: "developerId"
-            })
-        }
+        Developer.hasMany(models.Education, {
+            as: "educations",
+            foreignKey: "developerId"
+        });
+        
+        Developer.belongsToMany(models.Reviewer, {
+            through: "ProfileOwnership",
+            // la clave que hace referencia al id del developer en la tabla pivot
+            foreignKey: "developerId",
+            // la clave que hace referencia a la tabla con la que nos conectamos
+            otherKey: "reviewerId",
+            timestamps: false
+        })
+        Developer.hasMany(models.ProfileOwnership, {
+            foreignKey: "developerId"
+        })
+        Developer.belongsToMany(models.Reviewer, {
+            through: "skills_report_developer_reviewer",
+            foreignKey: "developerId",
+            otherKey: "reviewerId",
+            timestamps: false
+        })
+        Developer.hasMany(models.SkillsReportDeveloperReviewer, {
+            foreignKey: "developerId"
+        })
 
-    } 
+
+    }
 
 
     return Developer;

@@ -45,11 +45,20 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "skill_score",
         timestamps: false
     };
 
-    const Skill_score = sequelize.define(alias, cols, config);
+    const SkillScore = sequelize.define(alias, cols, config);
+
+    SkillScore.associate = (models) => {
+        SkillScore.belongsTo(models.SkillsReportDeveloperReviewer, {
+            foreignKey: "reportId"
+        })
+        SkillScore.belongsTo(models.Skill, {
+            foreignKey: "skillId"
+        })
+    }
     
-    return Skill_score;
+    return SkillScore;
 }

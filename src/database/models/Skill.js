@@ -55,11 +55,22 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "skill",
         timestamps: false
     };
 
     const Skill = sequelize.define(alias, cols, config);
+
+    Skill.associate = (models) => {
+        Skill.belongsToMany(models.SkillsReportDeveloperReviewer, {
+            through: "SkillScore",
+            foreignKey: "skillId",
+            otherKey: "reportId"
+        })
+        Skill.hasMany(models.SkillScore, {
+            foreignKey: "skillId"
+        })
+    }
     
     return Skill;
 }

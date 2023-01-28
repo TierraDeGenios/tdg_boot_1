@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-        depeloperId:{
+        developerId:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
@@ -51,11 +51,20 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "profile_ownership",
         timestamps: false
     };
 
-    const Profile_ownership = sequelize.define(alias, cols, config);
+    const ProfileOwnership = sequelize.define(alias, cols, config);
+
+    ProfileOwnership.associate = (models) => {
+        ProfileOwnership.belongsTo(models.Developer, {
+            foreignKey: "developerId"
+        })
+        ProfileOwnership.belongsTo(models.Reviewer, {
+            foreignKey: "reviewerId"
+        })
+    }
     
-    return Profile_ownership;
+    return ProfileOwnership;
 }

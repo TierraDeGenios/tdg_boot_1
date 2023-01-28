@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true, 
+        tableName: "recruiterSelection", 
         timestamps: false
     };
 
