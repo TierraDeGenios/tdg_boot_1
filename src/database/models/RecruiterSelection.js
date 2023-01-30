@@ -13,7 +13,7 @@
 );*/
 module.exports = (sequelize, DataTypes) => {
     
-    let alias = "ReviewerSelection";
+    let alias = "RecruiterSelection";
 
     let cols = {
         id:{
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        depeloperId:{
+        developerId:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
@@ -60,6 +60,16 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     const RecruiterSelection = sequelize.define(alias, cols, config);
+
+    RecruiterSelection.associate = (models) => {
+        RecruiterSelection.belongsTo(models.Developer, {
+            foreignKey:'developerId'
+        });
+
+        RecruiterSelection.belongsTo(models.Reviewer, {
+            foreignKey:'reviewerId'
+        });
+    }
     
     return RecruiterSelection;
 }

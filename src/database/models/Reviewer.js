@@ -104,7 +104,31 @@ module.exports = (sequelize, DataTypes) => {
         Reviewer.belongsTo(models.Role, {
             as: "role",
             foreignKey: "roleId"
-        })
+        });
+
+        Reviewer.belongsToMany(models.Language, {
+            as: "languages",
+            through:"UserLanguage",
+            foreignKey: "reviewerId",
+            otherKey:"languageId",
+            timestamps:false
+        });
+
+        Reviewer.belongsToMany(models.Developer, {
+            as: "selections",
+            through:"RecruiterSelection",
+            foreignKey: "reviewerId",
+            otherKey:"developerId",
+            timestamps:false
+        });
+
+        Reviewer.hasMany(models.UserLanguage, {
+            foreignKey: "reviewerId"
+        });
+
+        Reviewer.hasMany(models.RecruiterSelection, {
+            foreignKey: "reviewerId"
+        });
     }
 
     return Reviewer;

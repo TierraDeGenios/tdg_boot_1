@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         skillType:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         isActive:{
@@ -60,6 +60,16 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     const Skill = sequelize.define(alias, cols, config);
+
+    Skill.associate = (models) => {
+        Skill.belongsTo(models.TechLanguage, {
+            foreignKey:"techLanguageId"
+        });
+
+        Skill.belongsTo(models.Orientation, {
+            foreignKey:"orientationId"
+        });
+    }
     
     return Skill;
 }

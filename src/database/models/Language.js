@@ -44,9 +44,19 @@ module.exports = (sequelize, DataTypes) => {
             otherKey:'proficiencyId',
             timestamps:false
         });
+
         Language.hasMany(models.UserLanguage, {
             foreignKey: "languageId"
         });
+
+        Language.belongsToMany(models.Reviewer, {
+            as: "reviewers",
+            through:'UserLanguage',
+            foreignKey:'languageId',
+            otherKey:'reviewerId',
+            timestamps:false
+        });
+
     }
 
     return Language;

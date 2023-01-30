@@ -110,8 +110,8 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
-        // tableName: "developer",
+        //freezeTableName: true,
+        tableName: "developer",
         timestamps: false
     }
 
@@ -123,14 +123,27 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "developerId"
         });
 
-        Developer.associate = (models) => {
-            Developer.hasMany(models.Education, {
-                as: "educations",
-                foreignKey: "developerId"
-            })
-        }
+        Developer.hasMany(models.Education, {
+            as: "educations",
+            foreignKey: "developerId"
+        });
 
-    } 
+        Developer.belongsToMany(models.Reviewer, {
+            through:"RecruiterSelection",
+            foreignKey: "developerId",
+            otherKey:"reviewerId",
+            timestamps:false
+        });
+
+        Developer.hasMany(models.UserLanguage, {
+            foreignKey: "developerId"
+        });
+
+        Developer.hasMany(models.RecruiterSelection, {
+            foreignKey: "developerId"
+        });
+        
+    };
 
 
     return Developer;

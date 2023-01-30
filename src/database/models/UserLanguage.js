@@ -62,16 +62,29 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     };
 
-    const User_language = sequelize.define(alias, cols, config);
+    const UserLanguage = sequelize.define(alias, cols, config);
 
-    User_language.associate = (models) => {
-        User_language.belongsTo(models.Language, {
+    UserLanguage.associate = (models) => {
+        UserLanguage.belongsTo(models.Language, {
             foreignKey:'languageId'
         });
-        User_language.belongsTo(models.Proficiency, {
+
+        UserLanguage.belongsTo(models.Proficiency, {
             foreignKey:'proficiencyId'
+        });
+
+        UserLanguage.belongsTo(models.Developer, {
+            foreignKey:'developerId'
+        });
+
+        UserLanguage.belongsTo(models.Reviewer, {
+            foreignKey:'reviewerId'
+        });
+
+        UserLanguage.belongsTo(models.Role, {
+            foreignKey:'roleId'
         });
     }
     
-    return User_language;
+    return UserLanguage;
 }

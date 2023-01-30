@@ -39,6 +39,19 @@ module.exports = (sequelize, DataTypes) => {
 
     const Orientation = sequelize.define(alias, cols, config)
 
+    Orientation.associate = (models) => {
+        Orientation.belongsToMany(models.TechLanguage, {
+            //Al llamar la asociación se usa "Skills"
+            through:'Skill',
+            foreignKey:'orientationId',
+            otherKey:'techLanguageId',
+            timestamps:false
+        });
+
+        Orientation.hasMany(models.Skill, {
+            foreignKey: "orientationId"
+        });
+    }
 
     return Orientation;
 

@@ -196,6 +196,8 @@ CREATE TABLE skills_report_developer_reviewer (
     notes TEXT NOT NULL,
     reportType TINYINT NOT NULL,
 	isActive TINYINT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (developerId) REFERENCES developer(id),
 	FOREIGN KEY (reviewerId) REFERENCES reviewer(id)
 );

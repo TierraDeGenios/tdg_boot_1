@@ -41,9 +41,13 @@ module.exports = (sequelize, DataTypes) => {
 
     Role.associate = (models) => {
         Role.hasMany(models.Reviewer, {
-            as: "role",
+            as: "reviewers",
             foreignKey: "roleId"
         })
+
+        Role.hasMany(models.UserLanguage, {
+            foreignKey: "roleId"
+        });
     }
     
     return Role;

@@ -33,12 +33,26 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        // freezeTableName: true,
+        tableName: "tech_language",
         timestamps: false
     }
 
     const TechLanguage = sequelize.define(alias, cols, config)
 
+    TechLanguage.associate = (models) => {
+        TechLanguage.belongsToMany(models.Orientation, {
+            //Al llamar la asociación se usa "Skills"
+            through:'Skill',
+            foreignKey:'techLanguageId',
+            otherKey:'orientationId',
+            timestamps:false
+        });
+
+        TechLanguage.hasMany(models.Skill, {
+            foreignKey: "techLanguageId"
+        });
+    }
 
     return TechLanguage;
 
