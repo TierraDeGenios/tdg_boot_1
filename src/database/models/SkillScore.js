@@ -1,14 +1,3 @@
-/*CREATE TABLE skill_score (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    reportId INT UNSIGNED NOT NULL,
-    skillId INT UNSIGNED NOT NULL,
-    score DECIMAL(6,3) NOT NULL,
-    isActive TINYINT UNSIGNED NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (reportId) REFERENCES skills_report_developer_reviewer(id),
-    FOREIGN KEY (skillId) REFERENCES skill(id)
-);*/
 module.exports = (sequelize, DataTypes) => {
     
     let alias = "SkillScore";
@@ -45,11 +34,20 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "skill_score",
         timestamps: false
     };
 
-    const Skill_score = sequelize.define(alias, cols, config);
+    const SkillScore = sequelize.define(alias, cols, config);
+
+    SkillScore.associate = (models) => {
+        SkillScore.belongsTo(models.SkillsReportDeveloperReviewer, {
+            foreignKey: "reportId"
+        })
+        SkillScore.belongsTo(models.Skill, {
+            foreignKey: "skillId"
+        })
+    }
     
-    return Skill_score;
+    return SkillScore;
 }

@@ -1,10 +1,3 @@
-/*CREATE TABLE role (
-    id  INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    isActive TINYINT UNSIGNED NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);*/
 module.exports = (sequelize, DataTypes) => {
     
     let alias = "Role";
@@ -33,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "role",
         timestamps: false
     };
 

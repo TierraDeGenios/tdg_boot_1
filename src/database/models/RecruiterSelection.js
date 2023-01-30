@@ -1,16 +1,3 @@
-/*CREATE TABLE recruiterSelection (
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	reviewerId INT UNSIGNED NOT NULL,
-    developerId INT UNSIGNED NOT NULL ,
-    notes TEXT,
-    authorization TINYINT UNSIGNED NOT NULL,
-    status TINYINT UNSIGNED NOT NULL,
-    isActive TINYINT UNSIGNED NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	FOREIGN KEY (reviewerId) REFERENCES reviewer(id),
-    FOREIGN KEY(developerId) REFERENCES developer(id)
-);*/
 module.exports = (sequelize, DataTypes) => {
     
     let alias = "RecruiterSelection";
@@ -55,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true, 
+        tableName: "recruiterSelection", 
         timestamps: false
     };
 

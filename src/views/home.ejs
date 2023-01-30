@@ -10,6 +10,7 @@
     <h1>TIERRA DE GENIOS</h1>
     <ul>
         <% developers.forEach(developer => { %>
+            
             <% if (developer.workExperiences.length > 0 ) { %>
              
                 <li><%= developer.firstName %>  - <% developer.workExperiences.forEach(experience => { %>
@@ -29,6 +30,24 @@
        
             <li> <%= workExperience.position %> - <%= workExperience.developer.firstName %>  </li> 
          
+        <% }) %>
+    </ul>
+
+    <ul>
+        <% educations.forEach(education => { %>
+            <li><%= education.degree %> - <%= education.developerEducations.firstName %> </li>
+         
+        <% }) %>
+        
+    </ul>
+
+    <ul>
+        <% profileOwnerships.forEach(owner => { %>
+            
+            <li>
+                <%=owner.Reviewer.firstName %> <%= owner.percentage %>  
+            </li>
+
         <% }) %>
     </ul>
     

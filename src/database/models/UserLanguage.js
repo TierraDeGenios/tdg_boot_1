@@ -1,19 +1,3 @@
-/*CREATE TABLE user_language (
-	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    languageId INT UNSIGNED NOT NULL,
-    developerId INT UNSIGNED,
-    reviewerId INT UNSIGNED,
-    roleId INT UNSIGNED,
-    proficiencyId INT UNSIGNED NOT NULL,
-    isActive TINYINT UNSIGNED NOT NULL,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (languageId) REFERENCES language(id),
-    FOREIGN KEY (developerId) REFERENCES developer(id),
-    FOREIGN KEY (reviewerId) REFERENCES reviewer(id),
-	FOREIGN KEY (roleId) REFERENCES role (id),
-    FOREIGN KEY (proficiencyId) REFERENCES proficiency(id)
-);*/
 module.exports = (sequelize, DataTypes) => {
     
     let alias = "UserLanguage";

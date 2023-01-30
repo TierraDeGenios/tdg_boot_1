@@ -1,16 +1,3 @@
-/*CREATE TABLE skill (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    orientationId INT UNSIGNED,
-    techLanguageId INT UNSIGNED,
-    name VARCHAR(45) NOT NULL,
-    description TEXT,
-    skillType TINYINT UNSIGNED NOT NULL,
-    isActive TINYINT UNSIGNED NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (orientationId) REFERENCES orientation(id),
-    FOREIGN KEY (techLanguageId) REFERENCES tech_language(id)
-);*/
 module.exports = (sequelize, DataTypes) => {
     
     let alias = "Skill";
@@ -55,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true,
+        tableName: "skill",
         timestamps: false
     };
 
@@ -69,6 +56,14 @@ module.exports = (sequelize, DataTypes) => {
         Skill.belongsTo(models.Orientation, {
             foreignKey:"orientationId"
         });
+        Skill.belongsToMany(models.SkillsReportDeveloperReviewer, {
+            through: "SkillScore",
+            foreignKey: "skillId",
+            otherKey: "reportId"
+        })
+        Skill.hasMany(models.SkillScore, {
+            foreignKey: "skillId"
+        })
     }
     
     return Skill;

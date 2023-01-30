@@ -1,13 +1,3 @@
-/*CREATE TABLE skills_report_developer_reviewer (
-	id  INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    developerId INT UNSIGNED NOT NULL,
-    reviewerId INT UNSIGNED NOT NULL,
-    notes TEXT NOT NULL,
-    reportType TINYINT NOT NULL,
-	isActive TINYINT UNSIGNED NOT NULL,
-    FOREIGN KEY (developerId) REFERENCES developer(id),
-	FOREIGN KEY (reviewerId) REFERENCES reviewer(id)
-);*/
 module.exports = (sequelize, DataTypes) => {
     
     let alias = "SkillsReportDeveloperReviewer";
@@ -48,11 +38,29 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        freezeTableName: true, 
+        tableName: "skills_report_developer_reviewer", 
         timestamps: false
     };
 
-    const Skills_report_developer_reviewer = sequelize.define(alias, cols, config);
+    const SkillsReportDeveloperReviewer = sequelize.define(alias, cols, config);
+
+    SkillsReportDeveloperReviewer.associate = (models) => {
+        SkillsReportDeveloperReviewer.belongsTo(models.Developer, {
+            foreignKey: "developerId"
+        })
+        SkillsReportDeveloperReviewer.belongsTo(models.Reviewer, {
+            foreignKey: "reviewerId"
+        })
+        SkillsReportDeveloperReviewer.belongsToMany(models.Skill, {
+            through: "SkillScore",
+            foreignKey: "reportId",
+            otherKey: "skillId"
+        })
+        SkillsReportDeveloperReviewer.hasMany(models.SkillScore, {
+            foreignKey: "reportId"
+        })
+
+    }
     
-    return Skills_report_developer_reviewer;
+    return SkillsReportDeveloperReviewer;
 }
