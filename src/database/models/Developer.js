@@ -30,7 +30,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.STRING(100),
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         imgURL: {
             type: DataTypes.STRING(250),
@@ -68,7 +69,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         nickname: {
             type: DataTypes.STRING(50),
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         contractOnSite: {
             type: DataTypes.BOOLEAN,
