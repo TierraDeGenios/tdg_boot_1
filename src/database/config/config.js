@@ -1,9 +1,19 @@
+const dotenv = require('dotenv').config()
+
+// Accede a las variables de entorno
+const dbName = process.env.DB_NAME;
+const dbUser = process.env.DB_USERNAME;
+const dbPassword = process.env.DB_PASSWORD;
+const dbHost = process.env.DB_HOST;
+
+
 module.exports = {
+  
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "tdg_db",
-    "host": "127.0.0.1",
+    "username": dbUser,
+    "password": dbPassword,
+    "database": dbName,
+    "host": dbHost,
     "dialect": "mysql"
   },
   "test": {
