@@ -9,24 +9,24 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-        developerId:{
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false
-        },
         reviewerId:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
+        candidateId:{
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
         ownerCategory:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: true
         },
         percentage:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: true
         },
         isActive:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -45,11 +45,13 @@ module.exports = (sequelize, DataTypes) => {
     const ProfileOwnership = sequelize.define(alias, cols, config);
 
     ProfileOwnership.associate = (models) => {
-        ProfileOwnership.belongsTo(models.Developer, {
-            foreignKey: "developerId"
-        })
-        ProfileOwnership.belongsTo(models.Reviewer, {
+        ProfileOwnership.belongsTo(models.User, {
+            as:"reviewers",
             foreignKey: "reviewerId"
+        })
+        ProfileOwnership.belongsTo(models.User, {
+            as:"candidates",
+            foreignKey: "candidateId"
         })
     }
     

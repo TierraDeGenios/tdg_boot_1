@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-        developerId:{
+        reviewerId:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        reviewerId:{
+        candidateId:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
@@ -22,11 +22,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         reportType:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
+        // approved:{
+        //     type: DataTypes.INTEGER.UNSIGNED,
+        //     allowNull: false
+        // },
         isActive:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -45,20 +49,25 @@ module.exports = (sequelize, DataTypes) => {
     const SkillsReportDeveloperReviewer = sequelize.define(alias, cols, config);
 
     SkillsReportDeveloperReviewer.associate = (models) => {
-        SkillsReportDeveloperReviewer.belongsTo(models.Developer, {
-            foreignKey: "developerId"
-        })
-        SkillsReportDeveloperReviewer.belongsTo(models.Reviewer, {
+        SkillsReportDeveloperReviewer.hasMany(models.SkillScore, {
+            foreignKey: "reportId"
+        });
+        
+        SkillsReportDeveloperReviewer.belongsTo(models.User, {
+            as:"rewievers",
             foreignKey: "reviewerId"
-        })
+        });
+
+        SkillsReportDeveloperReviewer.belongsTo(models.User, {
+            as:"candidates",
+            foreignKey: "candidateId"
+        });
+
         SkillsReportDeveloperReviewer.belongsToMany(models.Skill, {
             through: "SkillScore",
             foreignKey: "reportId",
             otherKey: "skillId"
-        })
-        SkillsReportDeveloperReviewer.hasMany(models.SkillScore, {
-            foreignKey: "reportId"
-        })
+        });
 
     }
     

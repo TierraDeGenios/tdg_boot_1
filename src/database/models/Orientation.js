@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -40,17 +40,19 @@ module.exports = (sequelize, DataTypes) => {
     const Orientation = sequelize.define(alias, cols, config)
 
     Orientation.associate = (models) => {
+        
+        Orientation.hasMany(models.Skill, {
+            foreignKey: "orientationId"
+        });
+        
         Orientation.belongsToMany(models.TechLanguage, {
             //Al llamar la asociación se usa "Skills"
-            through:'Skill',
+            through:'skill',
             foreignKey:'orientationId',
             otherKey:'techLanguageId',
             timestamps:false
         });
 
-        Orientation.hasMany(models.Skill, {
-            foreignKey: "orientationId"
-        });
     }
 
     return Orientation;

@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -40,16 +40,17 @@ module.exports = (sequelize, DataTypes) => {
     const TechLanguage = sequelize.define(alias, cols, config)
 
     TechLanguage.associate = (models) => {
+
+        TechLanguage.hasMany(models.Skill, {
+            foreignKey: "techLanguageId"
+        });
+
         TechLanguage.belongsToMany(models.Orientation, {
             //Al llamar la asociación se usa "Skills"
             through:'Skill',
             foreignKey:'techLanguageId',
             otherKey:'orientationId',
             timestamps:false
-        });
-
-        TechLanguage.hasMany(models.Skill, {
-            foreignKey: "techLanguageId"
         });
     }
 

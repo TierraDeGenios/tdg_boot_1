@@ -13,15 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        developerId:{
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: true
-        },
-        reviewerId:{
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: true
-        },
-        roleId:{
+        userId:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: true
         },
@@ -30,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         isActive:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -49,24 +41,19 @@ module.exports = (sequelize, DataTypes) => {
     const UserLanguage = sequelize.define(alias, cols, config);
 
     UserLanguage.associate = (models) => {
+        //User
+        UserLanguage.belongsTo(models.User, {
+            foreignKey:'userId'
+        });
+
+        //Language
         UserLanguage.belongsTo(models.Language, {
             foreignKey:'languageId'
         });
 
+        //Proficiency
         UserLanguage.belongsTo(models.Proficiency, {
             foreignKey:'proficiencyId'
-        });
-
-        UserLanguage.belongsTo(models.Developer, {
-            foreignKey:'developerId'
-        });
-
-        UserLanguage.belongsTo(models.Reviewer, {
-            foreignKey:'reviewerId'
-        });
-
-        UserLanguage.belongsTo(models.Role, {
-            foreignKey:'roleId'
         });
     }
     

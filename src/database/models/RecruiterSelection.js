@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        developerId:{
+        candidateId:{
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
@@ -22,15 +22,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         authorization:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        status:{
-            type: DataTypes.BOOLEAN,
+        hired:{
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         isActive:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -42,19 +42,21 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     let config = {
-        tableName: "recruiterSelection", 
+        tableName: "recruiter_selection", 
         timestamps: false
     };
 
     const RecruiterSelection = sequelize.define(alias, cols, config);
 
     RecruiterSelection.associate = (models) => {
-        RecruiterSelection.belongsTo(models.Developer, {
-            foreignKey:'developerId'
+        RecruiterSelection.belongsTo(models.User, {
+            as:'reviewers',
+            foreignKey:'reviewerId'
         });
 
-        RecruiterSelection.belongsTo(models.Reviewer, {
-            foreignKey:'reviewerId'
+        RecruiterSelection.belongsTo(models.User, {
+            as:'candidates',
+            foreignKey:'candidateId'
         });
     }
     

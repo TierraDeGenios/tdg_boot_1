@@ -12,14 +12,13 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-
         proficiency: {
             type: DataTypes.STRING(30),
             allowNull: false
         },
 
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -40,15 +39,19 @@ module.exports = (sequelize, DataTypes) => {
     const Proficiency = sequelize.define(alias, cols, config)
 
     Proficiency.associate = (models) => {
+        //UserLanguage
+        Proficiency.hasMany(models.UserLanguage, {
+            foreignKey: "proficiencyId"
+        });
+
+        //Language
         Proficiency.belongsToMany(models.Language, {
-            through:'UserLanguage',
+            through:'user_language',
             foreignKey:'proficiencyId',
             otherKey:'languageId',
             timestamps:false
         });
-        Proficiency.hasMany(models.UserLanguage, {
-            foreignKey: "proficiencyId"
-        });
+        
     }
 
     return Proficiency;

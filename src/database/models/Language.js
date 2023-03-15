@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }, 
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
 
@@ -38,24 +38,30 @@ module.exports = (sequelize, DataTypes) => {
     const Language = sequelize.define(alias, cols, config)
 
     Language.associate = (models) => {
-        Language.belongsToMany(models.Proficiency, {
-            through:'UserLanguage',
-            foreignKey:'languageId',
-            otherKey:'proficiencyId',
-            timestamps:false
+        
+        Language.hasMany(models.Skill, {
+            foreignKey: "languageId"
         });
 
         Language.hasMany(models.UserLanguage, {
             foreignKey: "languageId"
         });
 
-        Language.belongsToMany(models.Reviewer, {
-            as: "reviewers",
-            through:'UserLanguage',
+        Language.belongsToMany(models.User, {
+            as: "users",
+            through:'user_language',
             foreignKey:'languageId',
-            otherKey:'reviewerId',
+            otherKey:'userId',
             timestamps:false
         });
+
+        Language.belongsToMany(models.Proficiency, {
+            through:'user_language',
+            foreignKey:'languageId',
+            otherKey:'proficiencyId',
+            timestamps:false
+        });
+        
 
     }
 

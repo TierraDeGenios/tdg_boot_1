@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-
-        developerId: {
+        userId: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
@@ -25,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATEONLY
         }, 
         current: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         description: {
@@ -40,11 +39,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         paid: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -64,9 +63,9 @@ module.exports = (sequelize, DataTypes) => {
     const WorkExperience = sequelize.define(alias, cols, config)
 
     WorkExperience.associate = (models) => {
-        WorkExperience.belongsTo(models.Developer, {
-            as: "developer",
-            foreignKey: "developerId"
+        WorkExperience.belongsTo(models.User, {
+            as: "user",
+            foreignKey: "userId"
         })
     }
 

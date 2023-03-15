@@ -1,5 +1,3 @@
-const { DataTypes } = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
 
     let alias = "Developer"
@@ -12,53 +10,8 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-
-        firstName: {
-            type: DataTypes.STRING(50),
-            allowNull: false
-        },
-        lastName: {
-            type: DataTypes.STRING(50),
-            allowNull: false
-        },
-        averageScore: {
-            type: DataTypes.DECIMAL(6, 3),
-            allowNull: false
-        },
-        about: {
-            type: DataTypes.TEXT,
-        },
-        email: {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-            unique: true
-        },
-        imgURL: {
-            type: DataTypes.STRING(250),
-            allowNull: false
-        },
-        avatarURL: {
-            type: DataTypes.STRING(250),
-            allowNull: false
-        },
-        phone: {
-            type: DataTypes.STRING(30),
-            allowNull: false
-        },
-        gender: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
-        birthdate: {
-            type: DataTypes.DATEONLY,
-            allowNull: false
-        },
-        password: {
-            type: DataTypes.STRING(30),
-            allowNull: false
-        },
-        country: {
-            type: DataTypes.STRING(100),
+        userId: {
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         address: {
@@ -67,21 +20,16 @@ module.exports = (sequelize, DataTypes) => {
         zipCode: {
             type: DataTypes.STRING(10),
         },
-        nickname: {
-            type: DataTypes.STRING(50),
-            allowNull: false,
-            unique: true
-        },
         contractOnSite: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         contractRemote: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         contractHybrid: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         gitHubURL: {
@@ -90,16 +38,19 @@ module.exports = (sequelize, DataTypes) => {
         linkedInURL: {
             type: DataTypes.STRING(250),
         },
+        // portfolioURL: {
+        //     type: DataTypes.STRING(250),
+        // },
         headline: {
             type: DataTypes.STRING(100),
             allowNull: false
         },
         openToWork: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at: {
@@ -117,60 +68,12 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     }
 
-    const Developer = sequelize.define(alias, cols, config)
-
+    const Developer = sequelize.define(alias, cols, config);
     Developer.associate = (models) => {
-        Developer.hasMany(models.WorkExperience, {
-            as: "workExperiences",
-            foreignKey: "developerId"
+        Developer.belongsTo(models.User, {
+            foreignKey: "userId"
         });
-
-        Developer.hasMany(models.Education, {
-            as: "educations",
-            foreignKey: "developerId"
-        });
-
-        Developer.belongsToMany(models.Reviewer, {
-            through:"RecruiterSelection",
-            foreignKey: "developerId",
-            otherKey:"reviewerId",
-            timestamps:false
-        });
-
-        Developer.hasMany(models.UserLanguage, {
-            foreignKey: "developerId"
-        });
-
-        Developer.hasMany(models.RecruiterSelection, {
-            foreignKey: "developerId"
-        });
-        
-        Developer.belongsToMany(models.Reviewer, {
-            through: "ProfileOwnership",
-            // la clave que hace referencia al id del developer en la tabla pivot
-            foreignKey: "developerId",
-            // la clave que hace referencia a la tabla con la que nos conectamos
-            otherKey: "reviewerId",
-            timestamps: false
-        });
-        Developer.hasMany(models.ProfileOwnership, {
-            foreignKey: "developerId"
-        });
-        Developer.belongsToMany(models.Reviewer, {
-            through: "skills_report_developer_reviewer",
-            foreignKey: "developerId",
-            otherKey: "reviewerId",
-            timestamps: false
-        });
-        Developer.hasMany(models.SkillsReportDeveloperReviewer, {
-            foreignKey: "developerId"
-        });
-
-
     }
 
-
     return Developer;
-
-
 }

@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-
-        developerId: {
+        userId: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
@@ -25,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATEONLY
         }, 
         current: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         institution: {
@@ -41,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         isActive: {
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -61,9 +60,9 @@ module.exports = (sequelize, DataTypes) => {
     const Education = sequelize.define(alias, cols, config);
 
     Education.associate = (models) => {
-        Education.belongsTo(models.Developer, {
-            as: "developerEducations",
-            foreignKey: "developerId"
+        Education.belongsTo(models.User, {
+            as: "userEducations",
+            foreignKey: "userId"
         })
     }
 

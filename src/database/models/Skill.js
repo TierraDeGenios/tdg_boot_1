@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
+        languageId:{
+            type: DataTypes.INTEGER.UNSIGNED,
+            allowNull: false
+        },
         name:{
             type: DataTypes.STRING(45),
             allowNull: false
@@ -26,11 +30,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         skillType:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         isActive:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -49,21 +53,34 @@ module.exports = (sequelize, DataTypes) => {
     const Skill = sequelize.define(alias, cols, config);
 
     Skill.associate = (models) => {
+
+        //Language
+        Skill.belongsTo(models.Language, {
+            foreignKey:"languageId"
+        });
+
+        //Orientation
+        Skill.belongsTo(models.Orientation, {
+            foreignKey:"orientationId"
+        });
+
+        //TechLanguage
         Skill.belongsTo(models.TechLanguage, {
             foreignKey:"techLanguageId"
         });
 
-        Skill.belongsTo(models.Orientation, {
-            foreignKey:"orientationId"
-        });
-        Skill.belongsToMany(models.SkillsReportDeveloperReviewer, {
-            through: "SkillScore",
-            foreignKey: "skillId",
-            otherKey: "reportId"
-        })
+        //SkillScore
         Skill.hasMany(models.SkillScore, {
             foreignKey: "skillId"
-        })
+        });
+
+        //SkillsReportDeveloperReviewer
+        Skill.belongsToMany(models.SkillsReportDeveloperReviewer, {
+            through: "skill_score",
+            foreignKey: "skillId",
+            otherKey: "reportId"
+        });
+        
     }
     
     return Skill;

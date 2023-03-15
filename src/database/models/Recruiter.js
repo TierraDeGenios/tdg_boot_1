@@ -1,55 +1,46 @@
 module.exports = (sequelize, DataTypes) => {
-    
-    let alias = "SkillScore";
+
+    let alias = "Recruiter";
 
     let cols = {
-        id:{
+        id: {
             type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
         },
-        reportId:{
+        userId: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        skillId:{
+        effectiveContracts: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        score:{
-            type: DataTypes.DECIMAL(6, 3),
-            allowNull: false
-        },
-        isActive:{
+        isActive: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
-        created_at:{
+        created_at: {
             type: DataTypes.DATE
         },
-        updated_at:{
+        updated_at: {
             type: DataTypes.DATE
         }
     };
 
     let config = {
-        tableName: "skill_score",
+        tableName: "recruiter",
         timestamps: false
     };
 
-    const SkillScore = sequelize.define(alias, cols, config);
+    const Reviewer = sequelize.define(alias, cols, config);
 
-    SkillScore.associate = (models) => {
-        SkillScore.belongsTo(models.Skill, {
-            foreignKey: "skillId"
+    Reviewer.associate = (models) => {
+        Reviewer.belongsTo(models.Role, {
+            foreignKey: "userId"
         });
-
-        SkillScore.belongsTo(models.SkillsReportDeveloperReviewer, {
-            foreignKey: "reportId"
-        });
-        
     }
-    
-    return SkillScore;
+
+    return Reviewer;
 }

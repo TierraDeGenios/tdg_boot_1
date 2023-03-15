@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         isActive:{
-            type: DataTypes.BOOLEAN,
+            type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
         },
         created_at:{
@@ -33,14 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     const Role = sequelize.define(alias, cols, config);
 
     Role.associate = (models) => {
-        Role.hasMany(models.Reviewer, {
-            as: "reviewers",
+        Role.hasMany(models.User, {
             foreignKey: "roleId"
         })
-
-        Role.hasMany(models.UserLanguage, {
-            foreignKey: "roleId"
-        });
     }
     
     return Role;
