@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+    font-family: 'Rufina', serif;
+}
+
+body {
+    background-color: #1C1B1F;
+}
+
+.main {
+    height: 100vh;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left: 5px;
+    width: 40%;
+    /* border: 2px red solid; */
+}
+
+
+.logo-mini {
+    width: 70%;
+
+}
+
+.language-icon {
+    align-self: center;
+    width: 20px;
+    height: 20px;
+    
+}
+
+.main-area {
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    padding: 15px;
+    width: 90%;
+
+}
+
+.logo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.big-logo {
+    width: 40%;
+}
+
+.caption-logo {
+    font-family: 'Rufina', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #D35692;
+    text-align: center;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.3px;  
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 25px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.divider {
+    border: 1px solid #49454F;
+
+}
+
+.login-text {
+
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    line-height: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.buttons-section {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.buttons-section button {
+    background: #D35692;
+    border-radius: 100px;
+    color: #FFFFFF;
+    padding: 16px;
+    width: 40%;
+}

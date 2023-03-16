@@ -1,55 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rufina:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/../styles/style.css">
+
+    <title>TDG</title>
 </head>
+
 <body>
-    <h1>TIERRA DE GENIOS</h1>
-    <ul>
-        <% developers.forEach(developer => { %>
-            
-            <% if (developer.workExperiences.length > 0 ) { %>
-             
-                <li><%= developer.firstName %>  - <% developer.workExperiences.forEach(experience => { %>
-                    
-                    <%= experience.company %> 
-                    <%= experience.position %> </li>
+    <header>
+        <nav class="menu">
+            <img class="logo-mini" src="/images/logo-mini.png" alt="">
+            <img class="language-icon" src="/images/spain.png" alt="">
+        </nav>
+    </header>
+    <main>
 
-                <% }) %>
-                
-            <% } %>
-         
-        <% }) %>
-    </ul>
+        <section class="main-area">
+            <article class="logo">
+            <img class="big-logo" src="/images/big-logo.png" alt="">
+            <p class="caption-logo">Tierra de Genios</p>
+            </article>
+            <article class="text">
+                Bienvenid@ a TDG, la plataforma que conecta a reclutadores y desarrolladores.
+                Con una sencilla interfaz y una base de datos actualizada de candidatos, te facilitamos el proceso.
+                Además, podes personalizar tu búsqueda para obtener resultados más precisos y ahorrar mucho tiempo.
+                <br>
+                <br>
+                ¡Ingresá y probá hoy nuestra plataforma!
+            </article>
+        </section>
+        <section class="login">
+            <hr class="divider">
+            <p class="login-text">Ingresar como</p>
+            <div class="buttons-section">
+                <button>Reclutador</button>
+                <button>Desarrollador</button>
+            </div>
+        </section>
 
-    <ul>
-        <% workExperiences.forEach(workExperience => { %>
-       
-            <li> <%= workExperience.position %> - <%= workExperience.developer.firstName %>  </li> 
-         
-        <% }) %>
-    </ul>
 
-    <ul>
-        <% educations.forEach(education => { %>
-            <li><%= education.degree %> - <%= education.developerEducations.firstName %> </li>
-         
-        <% }) %>
-        
-    </ul>
 
-    <ul>
-        <% profileOwnerships.forEach(owner => { %>
-            
-            <li>
-                <%=owner.Reviewer.firstName %> <%= owner.percentage %>  
-            </li>
 
-        <% }) %>
-    </ul>
-    
+
+
+
+
+
+
+
+    </main>
+
+
+
 </body>
+
 </html>

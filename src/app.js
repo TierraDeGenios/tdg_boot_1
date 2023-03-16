@@ -3,9 +3,10 @@ const app = express()
 const port = 3000;
 const mainRoutes = require("./routes")
 const path = require('path');
+
 // const dotenv = require('dotenv').config()
 
-
+app.use(express.static("./public"));
 app.use('/', mainRoutes);
 
 app.set("view engine", "ejs");
