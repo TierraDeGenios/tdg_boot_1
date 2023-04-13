@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "start": "clear && nodemon src/app.js -e .html, .css, .js, .mjs, .json",
+    "test": "clear && nodemon src/app.js -e .html, .css, .js, .mjs, .json",
+    "dev": "clear && nodemon src/app.js -e .html, .css, .js, .mjs, .json"
   },
   "repository": {
     "type": "git",
